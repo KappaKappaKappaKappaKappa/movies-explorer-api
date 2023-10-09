@@ -32,11 +32,11 @@ const createMovie = async (req, res, next) => {
       return next(
         new BadRequestError("Переданы некоректные данные для создания фильма!")
       );
-    } else if (err.code === 11000) {
-      return next(new ConflictError("Такой фильм уже есть!"));
-    } else {
-      return next(err);
     }
+    if (err.code === 11000) {
+      return next(new ConflictError("Такой фильм уже есть!"));
+    }
+    return next(err);
   }
 };
 
