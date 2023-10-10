@@ -61,7 +61,7 @@ const updateUser = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { name, email, password } = req.body;
   try {
     if (password.length < 8) {
       throw new BadRequestError("Пароль должен быть минимум из 8 символов");
@@ -100,7 +100,7 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       throw new AuthError("Неправильные почта или пароль!");
