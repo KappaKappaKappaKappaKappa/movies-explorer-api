@@ -6,6 +6,7 @@ const BadRequestError = require("../errors/BadRequestError");
 const ConflictError = require("../errors/ConflictError");
 const AuthError = require("../errors/AuthError");
 const { STATUS_OK, STATUS_CREATED } = require("../utils/statuses");
+const { JWT_SECRET } = require("../config");
 
 const getUser = async (req, res, next) => {
   try {
@@ -114,7 +115,7 @@ const login = async (req, res, next) => {
 
     const payload = { _id: user._id };
 
-    const token = jwt.sign(payload, "secret-key", { expiresIn: "1w" });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1w" });
 
     res.status(STATUS_OK).send({ token });
   } catch (err) {

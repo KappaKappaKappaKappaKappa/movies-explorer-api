@@ -1,13 +1,15 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
+const { DB_ADRESS } = require("./config");
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/bitfilmsdb");
+mongoose.connect(DB_ADRESS);
 
 app.use(express.json());
 
