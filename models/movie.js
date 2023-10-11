@@ -38,6 +38,8 @@ const movieSchema = new mongoose.Schema({
     validate: urlRegex,
   },
   owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
     required: true,
   },
   movieId: {

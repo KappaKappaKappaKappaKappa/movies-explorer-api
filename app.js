@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const { errors } = require("celebrate");
 const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 const { DB_ADRESS } = require("./config");
@@ -18,6 +19,8 @@ app.use(requestLogger);
 app.use("/", require("./routes/index"));
 
 app.use(errorLogger);
+
+app.use(errors());
 
 app.use(errorHandler);
 
