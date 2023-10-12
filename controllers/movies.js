@@ -1,4 +1,4 @@
-const Movie = require("../models/user");
+const Movie = require("../models/movie");
 const NotFoundError = require("../errors/NotFoundError");
 const BadRequestError = require("../errors/BadRequestError");
 const ConflictError = require("../errors/ConflictError");
@@ -43,7 +43,7 @@ const createMovie = async (req, res, next) => {
 const deleteMovie = async (req, res, next) => {
   try {
     const owner = req.user._id;
-    const { movieId } = req.params;
+    const { _id: movieId } = req.params;
 
     const movie = await Movie.findById(movieId);
     if (!movie) {
