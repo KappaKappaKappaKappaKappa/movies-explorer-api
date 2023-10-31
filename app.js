@@ -3,14 +3,25 @@ const mongoose = require("mongoose");
 const express = require("express");
 const { errors } = require("celebrate");
 const helmet = require("helmet");
+const cors = require("cors");
 const { errorHandler } = require("./middlewares/errorHandler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 const { DB_ADRESS } = require("./config");
 const { limiter } = require("./middlewares/limiter");
 
-const { PORT = 3000 } = process.env;
-
 const app = express();
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3001",
+    ],
+    credentials: true,
+    maxAge: 30,
+  })
+);
+
+const { PORT = 3000 } = process.env;
 
 mongoose.connect(DB_ADRESS);
 
