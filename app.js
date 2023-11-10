@@ -25,7 +25,7 @@ const { PORT = 3000 } = process.env;
 
 mongoose.connect(DB_ADRESS);
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(helmet());
 
