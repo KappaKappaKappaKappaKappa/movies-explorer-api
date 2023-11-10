@@ -40,7 +40,24 @@ const createMovie = async (req, res, next) => {
   }
 };
 
-git
+const deleteMovie = async (req, res, next) => {
+  try {
+    const owner = req.user._id;
+    const { _id: movieId } = req.params;
+
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
+      throw new NotFoundError("Выбранный фильм не найден!");
+    }
+    if (movie.owner.toString() !== owner) {
+      throw new ForbiddenError("Недостаточно прав для удаления фильма!");
+    }
+    const deletedMovie = await Movie.deleteOne({ _id: movieId });
+    res.status(STATUS_OK).send({ message: "Фильм успешно удален!" });
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   getMovies,
