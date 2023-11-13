@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3001",
-      "http://mov.explorer.nomoredomain.nomoredomainsmonster.ru"
+      "http://mov.explorer.nomoredomainsmonster.ru"
     ],
     credentials: true,
     maxAge: 30,
